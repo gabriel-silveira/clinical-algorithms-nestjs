@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Body, Get, Post } from '@nestjs/common';
 import { AlgorithmsService } from './algorithms.service';
+import { CreateAlgorithmDto } from "./dtos/create-algorithm-dto";
 
 @Controller('algorithms')
 export class AlgorithmsController {
@@ -8,5 +9,10 @@ export class AlgorithmsController {
   @Get()
   private index() {
     return this.algorithmsService.index();
+  }
+
+  @Post()
+  create(@Body() algorithm: CreateAlgorithmDto) {
+    return this.algorithmsService.create(algorithm);
   }
 }
