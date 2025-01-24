@@ -1,8 +1,8 @@
 import { Controller, Body, Get, Post, Put, Delete, Param } from "@nestjs/common";
-import { AlgorithmsService } from './algorithms.service';
+import { AlgorithmsService } from "./algorithms.service";
 import { Algorithms } from "./algorithm.entity";
 
-@Controller('algorithms')
+@Controller("algorithms")
 export class AlgorithmsController {
   constructor(private readonly algorithmsService: AlgorithmsService) {}
 
@@ -11,22 +11,22 @@ export class AlgorithmsController {
     return this.algorithmsService.index();
   }
 
-  @Get(':id')
+  @Get(":id")
   private show(@Param() params: any) {
     return this.algorithmsService.show(params.id);
   }
 
   @Post()
-  create(@Body() algorithm: Algorithms) {
+  private create(@Body() algorithm: Algorithms) {
     return this.algorithmsService.create(algorithm);
   }
 
-  @Put(':id')
+  @Put(":id")
   private update(@Param() params: any, @Body() algorithm: Algorithms) {
     return this.algorithmsService.update(params.id, algorithm);
   }
 
-  @Delete(':id')
+  @Delete(":id")
   private delete(@Param() params: any) {
     return this.algorithmsService.delete(params.id);
   }
