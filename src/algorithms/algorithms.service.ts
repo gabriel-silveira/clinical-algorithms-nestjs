@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 import { Algorithms } from './algorithm.entity';
-import { GraphsService } from "../graphs/graphs.service";
+import { GraphsService } from '../graphs/graphs.service';
 
 @Injectable()
 export class AlgorithmsService {

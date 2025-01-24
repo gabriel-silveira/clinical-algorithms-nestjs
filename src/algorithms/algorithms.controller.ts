@@ -1,10 +1,10 @@
 import { Controller, Body, Get, Post, Put, Delete, Param } from "@nestjs/common";
-import { AlgorithmsService } from "./algorithms.service";
-import { Algorithms } from "./algorithm.entity";
+import { AlgorithmsService } from './algorithms.service';
+import { Algorithms } from './algorithm.entity';
 
 @Controller("algorithms")
 export class AlgorithmsController {
-  constructor(private readonly algorithmsService: AlgorithmsService) {}
+  constructor(private readonly algorithmsService: AlgorithmsService) {  }
 
   @Get()
   private index() {
