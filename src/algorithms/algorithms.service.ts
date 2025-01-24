@@ -1,22 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAlgorithmDto } from './dtos/create-algorithm-dto';
+import { InjectRepository } from '@nestjs/typeorm';
 
-global.algorithms = [
-  {
-    name: 'Dengue',
-    description: 'Algoritmo de dengue',
-  },
-];
+import { Repository } from 'typeorm';
+import { Algorithms } from './algorithm.entity';
 
 @Injectable()
 export class AlgorithmsService {
-  index() {
-    return global.algorithms;
+  constructor(
+    @InjectRepository(Algorithms)
+    private algorithmsRepository: Repository<Algorithms>,
+  ) {}
+
+  index(): Promise<Algorithms[]> {
+    return this.algorithmsRepository.find();
   }
 
-  create(algorithm: CreateAlgorithmDto) {
-    global.algorithms.push(algorithm)
+  show(id: number): Promise<Algorithms | null> {
+    return this.algorithmsRepository.findOneBy({ id });
+  }
 
-    return algorithm
+  async create(algorithm: Algorithms) {
+    return await this.algorithmsRepository.save(algorithm);
   }
 }
