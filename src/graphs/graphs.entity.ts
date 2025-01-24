@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Graphs {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column()
   algorithm_id: number;

@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 import { Algorithms } from './algorithm.entity';
+import { GraphsService } from "../graphs/graphs.service";
 
 @Injectable()
 export class AlgorithmsService {
   constructor(
     @InjectRepository(Algorithms)
     private algorithmsRepository: Repository<Algorithms>,
+    private graphsService: GraphsService,
   ) {}
 
   index(): Promise<Algorithms[]> {
@@ -20,14 +22,21 @@ export class AlgorithmsService {
   }
 
   async create(algorithm: Algorithms) {
-    return await this.algorithmsRepository.save(algorithm);
+    const createdAlgorithm = await this.algorithmsRepository.save(algorithm);
+
+    await this.graphsService.create({
+      algorithm_id: createdAlgorithm.id,
+      graph: '',
+    });
+
+    return createdAlgorithm;
   }
 
-  async update(id: number, algorithm: Algorithms) {
-    return await this.algorithmsRepository.update(id, algorithm);
+  update(id: number, algorithm: Algorithms) {
+    return this.algorithmsRepository.update(id, algorithm);
   }
 
-  async delete(id: number) {
-    return await this.algorithmsRepository.delete(id);
+  delete(id: number) {
+    return this.algorithmsRepository.delete(id);
   }
 }

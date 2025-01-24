@@ -13,6 +13,7 @@ import { Links } from './links/links.entity';
 import { AppService } from './app.service';
 
 import { AppController } from './app.controller';
+import { GraphsModule } from "./graphs/graphs.module";
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { AppController } from './app.controller';
       synchronize: false,
     }),
     AlgorithmsModule,
+    GraphsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
