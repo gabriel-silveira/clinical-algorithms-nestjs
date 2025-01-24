@@ -22,4 +22,12 @@ export class AlgorithmsService {
   async create(algorithm: Algorithms) {
     return await this.algorithmsRepository.save(algorithm);
   }
+
+  async update(id: number, algorithm: Algorithms) {
+    return await this.algorithmsRepository.update(id, algorithm);
+  }
+
+  async delete(id: number) {
+    return await this.algorithmsRepository.delete(id);
+  }
 }
